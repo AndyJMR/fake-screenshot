@@ -12,9 +12,22 @@ const fontFamilies = [
   'Comic Sans MS',
 ];
 
+const images = [
+  '/assets/郭德纲.jpg',
+  '/assets/刘能.jpg',
+  '/assets/鲁迅.jpg',
+  '/assets/罗永浩.jpg',
+  '/assets/马斯克.jpg',
+  '/assets/马云.jpg',
+  '/assets/莫言.jpg',
+  '/assets/乔布斯.jpg',
+  '/assets/杨澜.jpg',
+  '/assets/于丹.jpg'
+];
+
 function App() {
   const [text, setText] = useState('');
-  const [image, setImage] = useState('/assets/郭德纲.jpg');
+  const [image, setImage] = useState('');
   const [fontFamily, setFontFamily] = useState('Arial');
   const [fontSize, setFontSize] = useState(24);
 
@@ -32,7 +45,8 @@ function App() {
   const handleRenderCanvas = useCallback(
     (text: string) => {
       const renderText = text || memoizedQuotes[Math.floor(Math.random() * memoizedQuotes.length)];
-      renderCanvas(canvasRef.current, renderText, image, fontFamily, fontSize, showWatermark);
+      const renderImage = image || images[Math.floor(Math.random() * images.length)];
+      renderCanvas(canvasRef.current, renderText, renderImage, fontFamily, fontSize, showWatermark);
     },
     [image, fontFamily, fontSize, memoizedQuotes, showWatermark] // 添加 showWatermark 到依赖项列表
   );
