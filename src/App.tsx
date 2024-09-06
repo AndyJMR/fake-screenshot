@@ -97,42 +97,11 @@ function App() {
     <div className="container mx-auto max-w-5xl min-w-fit">
       <header className="bg-blue-500 text-white p-10 text-center">
         <h1 className="text-4xl font-bold mb-10">我说过这话吗</h1>
-        <p className="text-xl">"都有截图了，一定是你说的"</p>
+        <p className="text-xl">"都有截图了，肯定是你说的"</p>
       </header>
 
       <main className="flex flex-wrap justify-center">
         <div className="column bg-white p-6 rounded shadow" style={{ width: 512 }}>
-          <label htmlFor="font-size-slider" className="block text-lg font-medium mb-2">
-            字体大小
-          </label>
-          <div className="flex items-center">
-            <input
-              id="font-size-slider"
-              type="range"
-              min="12"
-              max="48"
-              step="1"
-              value={fontSize}
-              onChange={e => setFontSize(Number(e.target.value))}
-              className="w-full mb-4 mr-4"
-            />
-            <span className="text-lg">{fontSize}px</span>
-          </div>
-          <label htmlFor="font-family-select" className="block text-lg font-medium mb-2">
-            选择字体
-          </label>
-          <select
-            id="font-family-select"
-            className="w-full p-2 border rounded mb-4"
-            value={fontFamily}
-            onChange={handleFontFamilyChange}
-          >
-            {fontFamilies.map(font => (
-              <option key={font} value={font}>
-                {font}
-              </option>
-            ))}
-          </select>
           <label htmlFor="image-select" className="block text-lg font-medium mb-2">
             选择英雄
           </label>
@@ -168,7 +137,46 @@ function App() {
             onChange={e => setText(e.target.value)}
             placeholder={memoizedQuotes[Math.floor(Math.random() * memoizedQuotes.length)]}
           ></textarea>
+          <label htmlFor="font-size-slider" className="block text-lg font-medium mb-2">
+            字号
+          </label>
+          <div className="flex items-center">
+            <input
+              id="font-size-slider"
+              type="range"
+              min="12"
+              max="48"
+              step="1"
+              value={fontSize}
+              onChange={e => setFontSize(Number(e.target.value))}
+              className="w-full mb-4 mr-4"
+            />
+            <span className="text-lg">{fontSize}px</span>
+          </div>
+          <label htmlFor="font-family-select" className="block text-lg font-medium mb-2">
+            字体
+          </label>
+          <select
+            id="font-family-select"
+            className="w-full p-2 border rounded mb-4"
+            value={fontFamily}
+            onChange={handleFontFamilyChange}
+          >
+            {fontFamilies.map(font => (
+              <option key={font} value={font}>
+                {font}
+              </option>
+            ))}
+          </select>
           <div className="space-y-2">
+            <textarea
+              id="watermark-input"
+              rows={1}
+              className="w-full p-2 border rounded mb-4"
+              value={watermarkText}
+              onChange={e => setWatermarkText(e.target.value)}
+              placeholder="鹿先生">
+            </textarea>
             <div className="flex mx-2 space-x-4">
               <button
                 className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
@@ -184,14 +192,6 @@ function App() {
                 保存图片
               </button>
             </div>
-            <textarea
-              id="watermark-input"
-              rows={1}
-              className="w-full p-2 border rounded mb-4"
-              value={watermarkText}
-              onChange={e => setWatermarkText(e.target.value)}
-              placeholder="鹿先生">
-            </textarea>
           </div>
         </div>
 
