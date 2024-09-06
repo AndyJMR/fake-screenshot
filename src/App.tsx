@@ -76,8 +76,8 @@ function App() {
   return (
     <div className="container mx-auto max-w-5xl min-w-fit">
       <header className="bg-blue-500 text-white p-10 text-center">
-        <h1 className="text-4xl font-bold mb-10">字幕截图生成器</h1>
-        <p className="text-xl">"都有截图了一定是真的"</p>
+        <h1 className="text-4xl font-bold mb-10">我说过这话吗</h1>
+        <p className="text-xl">"都有截图了，一定是你说的"</p>
       </header>
 
       <main className="flex flex-wrap justify-center">
@@ -143,7 +143,7 @@ function App() {
           <input type="file" id="image-upload" className="hidden" onChange={handleImageUpload} />
 
           <label htmlFor="text-input" className="block text-lg font-medium mb-2">
-            台词（一排不要太长了）
+            台词（一排不要太长了，不然会显示不全）
           </label>
           <textarea
             id="text-input"
