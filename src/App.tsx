@@ -27,7 +27,7 @@ const imageOptions = {
 
 function App() {
   const [text, setText] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('/assets/郭德纲.jpg');
   const [fontFamily, setFontFamily] = useState('Arial');
   const [fontSize, setFontSize] = useState(24);
   const [watermarkText, setWatermarkText] = useState('');
@@ -35,7 +35,7 @@ function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const memoizedQuotes = useMemo(() => quotes, []);
   // 添加状态来控制水印的显示
-  const [showWatermark, setShowWatermark] = useState(false);
+  const [showWatermark, setShowWatermark] = useState(true);
 
   // 处理开关变化的函数
   const handleToggleWatermark = () => {
@@ -46,9 +46,8 @@ function App() {
   const handleRenderCanvas = useCallback(
     (text: string) => {
       const renderText = text || memoizedQuotes[Math.floor(Math.random() * memoizedQuotes.length)];
-      const renderImage = image || Object.keys(imageOptions)[Math.floor(Math.random() * Object.keys(imageOptions).length)];
       const renderWatermarkText = watermarkText || "鹿先生";
-      renderCanvas(canvasRef.current, renderText, renderImage, fontFamily, fontSize, showWatermark, renderWatermarkText);
+      renderCanvas(canvasRef.current, renderText, image, fontFamily, fontSize, showWatermark, renderWatermarkText);
     },
     [image, fontFamily, fontSize, memoizedQuotes, showWatermark, watermarkText] // 添加 showWatermark 到依赖项列表
   );
