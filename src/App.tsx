@@ -30,6 +30,7 @@ function App() {
   const [image, setImage] = useState('');
   const [fontFamily, setFontFamily] = useState('Arial');
   const [fontSize, setFontSize] = useState(24);
+  const [watermarkText, setWatermarkText] = useState('');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const memoizedQuotes = useMemo(() => quotes, []);
@@ -46,14 +47,15 @@ function App() {
     (text: string) => {
       const renderText = text || memoizedQuotes[Math.floor(Math.random() * memoizedQuotes.length)];
       const renderImage = image || Object.keys(imageOptions)[Math.floor(Math.random() * Object.keys(imageOptions).length)];
-      renderCanvas(canvasRef.current, renderText, renderImage, fontFamily, fontSize, showWatermark);
+      const renderWatermarkText = watermarkText || "鹿先生";
+      renderCanvas(canvasRef.current, renderText, renderImage, fontFamily, fontSize, showWatermark, renderWatermarkText);
     },
-    [image, fontFamily, fontSize, memoizedQuotes, showWatermark] // 添加 showWatermark 到依赖项列表
+    [image, fontFamily, fontSize, memoizedQuotes, showWatermark, watermarkText] // 添加 showWatermark 到依赖项列表
   );
 
   useEffect(() => {
     handleRenderCanvas(text);
-  }, [text, image, fontFamily, handleRenderCanvas]);
+  }, [text, image, fontFamily, fontSize, watermarkText, showWatermark, handleRenderCanvas]);
 
   const handleFontFamilyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newFontFamily = e.target.value;
@@ -162,20 +164,30 @@ function App() {
             onChange={e => setText(e.target.value)}
             placeholder={memoizedQuotes[Math.floor(Math.random() * memoizedQuotes.length)]}
           ></textarea>
-          <div className="flex mx-2 space-x-4">
-            <button
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-              onClick={handleToggleWatermark}
-            >
-              {showWatermark ? '隐藏水印' : '显示水印'}
-            </button>
+          <div className="space-y-2">
+            <div className="flex mx-2 space-x-4">
+              <button
+                className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+                onClick={handleToggleWatermark}
+              >
+                {showWatermark ? '隐藏水印' : '显示水印'}
+              </button>
 
-            <button
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-              onClick={handleSaveClick}
-            >
-              保存图片
-            </button>
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                onClick={handleSaveClick}
+              >
+                保存图片
+              </button>
+            </div>
+            <textarea
+              id="watermark-input"
+              rows={1}
+              className="w-full p-2 border rounded mb-4"
+              value={watermarkText}
+              onChange={e => setWatermarkText(e.target.value)}
+              placeholder="鹿先生">
+            </textarea>
           </div>
         </div>
 

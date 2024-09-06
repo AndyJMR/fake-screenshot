@@ -4,7 +4,8 @@ export const renderCanvas = (
   image: string,
   fontFamily: string,
   fontSize: number,
-  showWatermark: boolean // 添加这个新参数来控制水印的显示
+  showWatermark: boolean, // 添加这个新参数来控制水印的显示
+  watermarkText: string
 ) => {
   if (!canvas) return;
 
@@ -49,7 +50,6 @@ export const renderCanvas = (
 
     // 根据showWatermark决定是否绘制水印
     if (showWatermark) {
-      const watermarkText = '由字幕生成器生成';
       const watermarkFontSize = 12;
       const watermarkOpacity = 0.5;
       const watermarkMargin = 10;
