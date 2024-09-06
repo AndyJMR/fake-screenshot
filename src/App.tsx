@@ -12,18 +12,18 @@ const fontFamilies = [
   'Comic Sans MS',
 ];
 
-const images = [
-  '/assets/郭德纲.jpg',
-  '/assets/刘能.jpg',
-  '/assets/鲁迅.jpg',
-  '/assets/罗永浩.jpg',
-  '/assets/马斯克.jpg',
-  '/assets/马云.jpg',
-  '/assets/莫言.jpg',
-  '/assets/乔布斯.jpg',
-  '/assets/杨澜.jpg',
-  '/assets/于丹.jpg'
-];
+const imageOptions = {
+  '/assets/郭德纲.jpg': '郭德纲',
+  '/assets/刘能.jpg': '刘能',
+  '/assets/鲁迅.jpg': '鲁迅',
+  '/assets/罗永浩.jpg': '罗永浩',
+  '/assets/马斯克.jpg': '马斯克',
+  '/assets/马云.jpg': '马云',
+  '/assets/莫言.jpg': '莫言',
+  '/assets/乔布斯.jpg': '乔布斯',
+  '/assets/杨澜.jpg': '杨澜',
+  '/assets/于丹.jpg': '于丹',
+};
 
 function App() {
   const [text, setText] = useState('');
@@ -45,7 +45,7 @@ function App() {
   const handleRenderCanvas = useCallback(
     (text: string) => {
       const renderText = text || memoizedQuotes[Math.floor(Math.random() * memoizedQuotes.length)];
-      const renderImage = image || images[Math.floor(Math.random() * images.length)];
+      const renderImage = image || Object.keys(imageOptions)[Math.floor(Math.random() * Object.keys(imageOptions).length)];
       renderCanvas(canvasRef.current, renderText, renderImage, fontFamily, fontSize, showWatermark);
     },
     [image, fontFamily, fontSize, memoizedQuotes, showWatermark] // 添加 showWatermark 到依赖项列表
@@ -136,16 +136,11 @@ function App() {
             value={image}
             onChange={handleImageChange}
           >
-            <option value="/assets/郭德纲.jpg">郭德纲</option>
-            <option value="/assets/刘能.jpg">刘能</option>
-            <option value="/assets/鲁迅.jpg">鲁迅</option>
-            <option value="/assets/罗永浩.jpg">罗永浩</option>
-            <option value="/assets/马斯克.jpg">马斯克</option>
-            <option value="/assets/马云.jpg">马云</option>
-            <option value="/assets/莫言.jpg">莫言</option>
-            <option value="/assets/乔布斯.jpg">乔布斯</option>
-            <option value="/assets/杨澜.jpg">杨澜</option>
-            <option value="/assets/于丹.jpg">于丹</option>
+            {Object.entries(imageOptions).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </select>
 
           <label
