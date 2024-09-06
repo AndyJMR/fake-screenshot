@@ -177,20 +177,6 @@ function App() {
           <canvas ref={canvasRef} className="w-full h-auto border rounded"></canvas>
         </div>
       </main>
-
-      <footer className="bg-blue-500 text-white p-4 text-center mt-8">
-        <p>
-          GitHub: &nbsp;
-          <a
-            href="https://github.com/huccct/fake-screenshot"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            https://github.com/huccct/fake-screenshot
-          </a>
-        </p>
-      </footer>
     </div>
   );
 }
