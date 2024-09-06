@@ -25,9 +25,14 @@ const imageOptions = {
   '/assets/于丹.jpg': '于丹',
 };
 
+const getRandomImage = () => {
+  const keys = Object.keys(imageOptions);
+  return keys[Math.floor(Math.random() * keys.length)];
+};
+
 function App() {
   const [text, setText] = useState('');
-  const [image, setImage] = useState('/assets/郭德纲.jpg');
+  const [image, setImage] = useState(getRandomImage());
   const [fontFamily, setFontFamily] = useState('Arial');
   const [fontSize, setFontSize] = useState(24);
   const [watermarkText, setWatermarkText] = useState('');
